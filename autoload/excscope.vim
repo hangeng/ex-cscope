@@ -96,8 +96,8 @@ function excscope#goto() " <<<
     endif
 
     " go back if needed
-    let winnum = bufwinnr(s:title)
-    call ex#window#operate( winnum, g:exCS_close_when_selected, g:exCS_backto_editbuf, 1 )
+    " let winnum = bufwinnr(s:title)
+    " call ex#window#operate( winnum, g:exCS_close_when_selected, g:exCS_backto_editbuf, 1 )
 
     return 1
 endfunction " >>>
