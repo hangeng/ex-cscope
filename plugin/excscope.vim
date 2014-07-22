@@ -1,3 +1,9 @@
+" ======================================================================================
+" File         : excscope.vim
+" Author       : Wu Jie , Larrupingpig
+" Last Change  : 07/22/2014 | 22:14:31 PM 
+" Description  : 
+" ======================================================================================
 " default configuration {{{1
 if !exists('g:ex_cscope_winsize')
     let g:ex_cscope_winsize = 20
@@ -24,32 +30,32 @@ endif
 " Desc: window height for horizon window mode
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_window_height')
-    let g:exCS_window_height = 20
+if !exists('g:excs_window_height')
+    let g:excs_window_height = 20
 endif
 
 " ------------------------------------------------------------------ 
 " Desc: window width for vertical window mode
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_window_width')
-    let g:exCS_window_width = 48
+if !exists('g:excs_window_width')
+    let g:excs_window_width = 48
 endif
 
 " ------------------------------------------------------------------ 
 " Desc: window height increment value
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_window_height_increment')
-    let g:exCS_window_height_increment = 30
+if !exists('g:excs_window_height_increment')
+    let g:excs_window_height_increment = 30
 endif
 
 " ------------------------------------------------------------------ 
 " Desc: window width increment value
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_window_width_increment')
-    let g:exCS_window_width_increment = 50
+if !exists('g:excs_window_width_increment')
+    let g:excs_window_width_increment = 50
 endif
 
 " ------------------------------------------------------------------ 
@@ -57,15 +63,15 @@ endif
 " 'topleft','botright','belowright'
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_window_direction')
-    let g:exCS_window_direction = 'belowright'
+if !exists('g:excs_window_direction')
+    let g:excs_window_direction = 'belowright'
 endif
 
 " ------------------------------------------------------------------ 
 " Desc: use vertical or not
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_use_vertical_window')
+if !exists('g:excs_use_vertical_window')
     let g:exCS_use_vertical_window = 0
 endif
 
@@ -73,16 +79,16 @@ endif
 " Desc: go back to edit buffer
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_backto_editbuf')
-    let g:exCS_backto_editbuf = 0
+if !exists('g:excs_backto_editbuf')
+    let g:excs_backto_editbuf = 0
 endif
 
 " ------------------------------------------------------------------ 
 " Desc: go and close exTagSelect window
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_close_when_selected')
-    let g:exCS_close_when_selected = 0
+if !exists('g:excs_close_when_selected')
+    let g:excs_close_when_selected = 0
 endif
 
 " ------------------------------------------------------------------ 
@@ -90,22 +96,17 @@ endif
 " 'none', 'append', 'replace'
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_edit_mode')
-    let g:exCS_edit_mode = 'replace'
+if !exists('g:excs_edit_mode')
+    let g:excs_edit_mode = 'replace'
 endif
 
 " ------------------------------------------------------------------ 
 " Desc: use syntax highlight for search result
 " ------------------------------------------------------------------ 
 
-if !exists('g:exCS_highlight_result')
-    let g:exCS_highlight_result = 0
+if !exists('g:excs_highlight_result')
+    let g:excs_highlight_result = 0
 endif
-
-
-
-
-"}}}
 
 " commands {{{1
 command! -n=1 -complete=customlist,ex#compl_by_symbol TSelect call excscope#select('<args>')
@@ -122,21 +123,21 @@ command EXCsParseFunction call excscope#ParseFunction()
 " Commands
 "/////////////////////////////////////////////////////////////////////////////
 
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSD call excscope#GetSearchResult('<args>', 'da')
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSC call excscope#GetSearchResult('<args>', 'c')
-command -nargs=1 -complete=customlist,exUtility#CompleteByProjectFile CSI call excscope#GetSearchResult('<args>', 'i')
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSS call excscope#GetSearchResult('<args>', 's')
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSG call excscope#GetSearchResult('<args>', 'g')
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSE call excscope#GetSearchResult('<args>', 'e')
+command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSD call excscope#get_searchresult('<args>', 'da')
+command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSC call excscope#get_searchresult('<args>', 'c')
+command -nargs=1 -complete=customlist,exUtility#CompleteByProjectFile CSI call excscope#get_searchresult('<args>', 'i')
+command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSS call excscope#get_searchresult('<args>', 's')
+command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSG call excscope#get_searchresult('<args>', 'g')
+command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSE call excscope#get_searchresult('<args>', 'e')
 
 
-command CSDD call excscope#GoDirect('da')
-command CSCD call excscope#GoDirect('c')
-command CSID call excscope#GoDirect('i')
-command CSIC call excscope#GetSearchResult(fnamemodify( bufname("%"), ":p:t" ), 'i')
-command CSSD call excscope#GoDirect('s')
-command CSGD call excscope#GoDirect('g')
-command CSED call excscope#GoDirect('e')
+command CSDD call excscope#go_direct('da')
+command CSCD call excscope#go_direct('c')
+command CSID call excscope#go_direct('i')
+command CSIC call excscope#get_searchresult(fnamemodify( bufname("%"), ":p:t" ), 'i')
+command CSSD call excscope#go_direct('s')
+command CSGD call excscope#go_direct('g')
+command CSED call excscope#go_direct('e')
 
 
 "}}}
