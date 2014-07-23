@@ -48,11 +48,17 @@ let s:excs_quick_view_idx = 1
 let s:excs_picked_search_result = []
 let s:excs_quick_view_search_pattern = ''
 
-function g:exCS_ConnectCscopeFile() " <<<
+let s:excs_csfile = './cscope.out'
+
+function excscope#set_csfile(path)
+    let s:excs_csfile = a:path
+endfunction
+
+function g:excs_connect_cscopefile() " <<<
     " don't show any message
 	setlocal nocsverb
     " connect cscope files
-    silent exec "cscope add " . g:exES_Cscope
+    silent exec "cscope add " . s:excs_csfile
 	silent! setlocal cscopequickfix=s-,c-,d-,i-,t-,e-
 endfunction " >>>
 
@@ -252,8 +258,8 @@ endfunction " >>>
 
 function excscope#get_searchresult(search_pattern, search_method) " <<<
     " if cscope file not connect, connect it
-    if cscope_connection(4, "cscope.out", g:exES_Cscope ) == 0
-        call g:exCS_ConnectCscopeFile()
+    if cscope_connection(4, "cscope.out", s:excs_csfile ) == 0
+        call g:excs_connect_cscopefile()
     endif
 
     " jump back to edit buffer first
