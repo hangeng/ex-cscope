@@ -23,27 +23,25 @@ let s:cscope_list = []
 let s:cscope = ''
 let s:last_line_nr = -1
 
-" check if plugin loaded
-if exists('loaded_excscope') || &cp
-    finish
-endif
-
-let loaded_excscope=1
-
 " ------------------------------------------------------------------ 
 " Desc: general
 " ------------------------------------------------------------------ 
+"
 let s:excs_fold_start = '<<<<<<'
 let s:excs_fold_end = '>>>>>>'
 let s:excs_ignore_case = 1
 let s:excs_need_search_again = 0
+
 " ------------------------------------------------------------------ 
 " Desc: select variable
 " ------------------------------------------------------------------ 
+"
 let s:excs_select_idx = 1
+
 " ------------------------------------------------------------------ 
 " Desc: quick view variable
 " ------------------------------------------------------------------ 
+"
 let s:excs_quick_view_idx = 1
 let s:excs_picked_search_result = []
 let s:excs_quick_view_search_pattern = ''
@@ -54,7 +52,7 @@ function excscope#set_csfile(path)
     let s:excs_csfile = a:path
 endfunction
 
-function g:excs_connect_cscopefile() " <<<
+function excscope#connect() " <<<
     " don't show any message
 	setlocal nocsverb
     " connect cscope files
@@ -259,7 +257,7 @@ endfunction " >>>
 function excscope#get_searchresult(search_pattern, search_method) " <<<
     " if cscope file not connect, connect it
     if cscope_connection(4, "cscope.out", s:excs_csfile ) == 0
-        call g:excs_connect_cscopefile()
+        call excscope#connect()
     endif
 
     " jump back to edit buffer first
@@ -565,30 +563,30 @@ function excscope#toggle_zoom()
     endif
 endfunction
 
-" excscope#cursor_moved {{{2
-function excscope#cursor_moved()
-    let line_num = line('.')
-    if line_num == s:last_line_nr
-        return
-    endif
+" " excscope#cursor_moved {{{2
+" function excscope#cursor_moved()
+"     let line_num = line('.')
+"     if line_num == s:last_line_nr
+"         return
+"     endif
 
-    while match(getline('.'), '^\s\+\d\+:') == -1
-        if line_num > s:last_line_nr
-            if line('.') == line('$')
-                break
-            endif
-            silent exec 'normal! j'
-        else
-            if line('.') == 1
-                silent exec 'normal! 2j'
-                let s:last_line_nr = line_num - 1
-            endif
-            silent exec 'normal! k'
-        endif
-    endwhile
+"     while match(getline('.'), '^\s\+\d\+:') == -1
+"         if line_num > s:last_line_nr
+"             if line('.') == line('$')
+"                 break
+"             endif
+"             silent exec 'normal! j'
+"         else
+"             if line('.') == 1
+"                 silent exec 'normal! 2j'
+"                 let s:last_line_nr = line_num - 1
+"             endif
+"             silent exec 'normal! k'
+"         endif
+"     endwhile
 
-    let s:last_line_nr = line('.')
-endfunction
+"     let s:last_line_nr = line('.')
+" endfunction
 
 " excscope#confirm_select {{{2
 " modifier: '' or 'shift'
