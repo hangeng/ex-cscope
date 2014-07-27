@@ -1,9 +1,3 @@
-" ======================================================================================
-" File         : excscope.vim
-" Author       : Wu Jie , Larrupingpig
-" Last Change  : 07/22/2014 | 22:14:31 PM 
-" Description  : 
-" ======================================================================================
 " default configuration {{{1
 if !exists('g:ex_cscope_winsize')
     let g:ex_cscope_winsize = 20
@@ -26,88 +20,6 @@ if !exists('g:ex_cscope_enable_help')
     let g:ex_cscope_enable_help = 1
 endif
 
-" ------------------------------------------------------------------ 
-" Desc: window height for horizon window mode
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_window_height')
-    let g:excs_window_height = 20
-endif
-
-" ------------------------------------------------------------------ 
-" Desc: window width for vertical window mode
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_window_width')
-    let g:excs_window_width = 48
-endif
-
-" ------------------------------------------------------------------ 
-" Desc: window height increment value
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_window_height_increment')
-    let g:excs_window_height_increment = 30
-endif
-
-" ------------------------------------------------------------------ 
-" Desc: window width increment value
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_window_width_increment')
-    let g:excs_window_width_increment = 50
-endif
-
-" ------------------------------------------------------------------ 
-" Desc: placement of the window
-" 'topleft','botright','belowright'
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_window_direction')
-    let g:excs_window_direction = 'belowright'
-endif
-
-" ------------------------------------------------------------------ 
-" Desc: use vertical or not
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_use_vertical_window')
-    let g:exCS_use_vertical_window = 0
-endif
-
-" ------------------------------------------------------------------ 
-" Desc: go back to edit buffer
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_backto_editbuf')
-    let g:excs_backto_editbuf = 0
-endif
-
-" ------------------------------------------------------------------ 
-" Desc: go and close exTagSelect window
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_close_when_selected')
-    let g:excs_close_when_selected = 0
-endif
-
-" ------------------------------------------------------------------ 
-" Desc: set edit mode
-" 'none', 'append', 'replace'
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_edit_mode')
-    let g:excs_edit_mode = 'replace'
-endif
-
-" ------------------------------------------------------------------ 
-" Desc: use syntax highlight for search result
-" ------------------------------------------------------------------ 
-
-if !exists('g:excs_highlight_result')
-    let g:excs_highlight_result = 0
-endif
-
 " commands {{{1
 command! -n=1 -complete=customlist,ex#compl_by_symbol TSelect call excscope#select('<args>')
 command! EXCScopeCWord call excscope#select(expand('<cword>'))
@@ -115,7 +27,7 @@ command! EXCScopeCWord call excscope#select(expand('<cword>'))
 command! EXCSToggle call excscope#toggle_window()
 command! EXCSOpen call excscope#open_window()
 command! EXCSClose call excscope#close_window()
-command EXCSParseFunction call excscope#ParseFunction()
+command EXCSParseFunction call excscope#parse_function()
 
 "/////////////////////////////////////////////////////////////////////////////
 " Commands
