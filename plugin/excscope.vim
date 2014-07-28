@@ -21,6 +21,7 @@ if !exists('g:ex_cscope_enable_help')
 endif
 
 " commands {{{1
+command! -n=1 -complete=customlist,ex#compl_by_symbol CSelect call excscope#select('<args>')
 command! EXCScopeCWord call excscope#select(expand('<cword>'))
 
 command! EXCSToggle call excscope#toggle_window()
