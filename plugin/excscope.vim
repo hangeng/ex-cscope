@@ -27,27 +27,27 @@ command! EXCScopeCWord call excscope#select(expand('<cword>'))
 command! EXCSToggle call excscope#toggle_window()
 command! EXCSOpen call excscope#open_window()
 command! EXCSClose call excscope#close_window()
-command EXCSParseFunction call excscope#parse_function()
+command! EXCSParseFunction call excscope#parse_function()
 
 "/////////////////////////////////////////////////////////////////////////////
 " Commands
 "/////////////////////////////////////////////////////////////////////////////
 
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSD call excscope#get_searchresult('<args>', 'da')
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSC call excscope#get_searchresult('<args>', 'c')
-command -nargs=1 -complete=customlist,exUtility#CompleteByProjectFile CSI call excscope#get_searchresult('<args>', 'i')
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSS call excscope#get_searchresult('<args>', 's')
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSG call excscope#get_searchresult('<args>', 'g')
-command -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSE call excscope#get_searchresult('<args>', 'e')
+command! -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSD call excscope#get_searchresult('<args>', 'da')
+command! -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSC call excscope#get_searchresult('<args>', 'c')
+command! -nargs=1 -complete=customlist,exUtility#CompleteByProjectFile CSI call excscope#get_searchresult('<args>', 'i')
+command! -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSS call excscope#get_searchresult('<args>', 's')
+command! -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSG call excscope#get_searchresult('<args>', 'g')
+command! -nargs=1 -complete=customlist,exUtility#CompleteBySymbolFile CSE call excscope#get_searchresult('<args>', 'e')
 
 
-command CSDD call excscope#go_direct('da') " Find functions called by this function
-command CSCD call excscope#go_direct('c') " Find functions calling this function
-command CSID call excscope#go_direct('i') " Find files #including this file
-command CSIC call excscope#get_searchresult(fnamemodify( bufname("%"), ":p:t" ), 'i')
-command CSSD call excscope#go_direct('s') " Find this C symbol
-command CSGD call excscope#go_direct('g') " Find this definition
-command CSED call excscope#go_direct('e') " Find this egrep pattern
+command! CSDD call excscope#go_direct('da') " Find functions called by this function
+command! CSCD call excscope#go_direct('c') " Find functions calling this function
+command! CSID call excscope#go_direct('i') " Find files #including this file
+command! CSIC call excscope#get_searchresult(fnamemodify( bufname("%"), ":p:t" ), 'i')
+command! CSSD call excscope#go_direct('s') " Find this C symbol
+command! CSGD call excscope#go_direct('g') " Find this definition
+command! CSED call excscope#go_direct('e') " Find this egrep pattern
 
 
 "}}}
