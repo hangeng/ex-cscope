@@ -156,6 +156,12 @@ function excscope#connect()
 	silent! setlocal cscopequickfix=s-,c-,d-,i-,t-,e-
 endfunction 
 
+function excscope#kill()
+    " kill cscope files
+    silent exec " cscope kill " . fnamemodify(s:csfile, ':p')
+endfunction 
+
+
 " excscope#goto {{{2
 " goto select line
 function excscope#goto()
