@@ -348,7 +348,7 @@ endfunction
 
 function excscope#get_searchresult(search_pattern, search_method)
     " if cscope file not connect, connect it
-    if cscope_connection(4, "cscope.out", s:csfile ) == 0
+    if cscope_connection(2, fnamemodify(s:csfile, ':p') ) == 0
         call excscope#connect()
     endif
 
