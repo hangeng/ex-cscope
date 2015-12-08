@@ -68,7 +68,9 @@ endfunction
 
 function excscope#init_buffer()
     set filetype=excscope
-    au! BufWinLeave <buffer> call <SID>on_close()
+    augroup excscope
+        au! BufWinLeave <buffer> call <SID>on_close()
+    augroup END
 
     if line('$') <= 1 && g:ex_cscope_enable_help
         silent call append ( 0, s:help_text )
