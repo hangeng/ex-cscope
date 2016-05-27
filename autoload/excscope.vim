@@ -166,7 +166,7 @@ endfunction
 
 " excscope#goto {{{2
 " goto select line
-function excscope#goto()
+function excscope#goto(modifier)
     " check if the line can jump
     let line = getline('.')
 
@@ -181,10 +181,22 @@ function excscope#goto()
 
         " start jump
         call ex#window#goto_edit_window()
+        if a:modifier == 'shift'
+            let linenr = qf_item.lnum
+            let filename = bufname(qf_item.bufnr)
+            exe 'silent pedit +'.linenr .' '. filename
+            silent! wincmd P
+            if &previewwindow
+                call ex#hl#target_line(line('.'))
+                wincmd p
+            endif
+            call ex#window#goto_plugin_window()
+        else
         if bufnr('%') != qf_item.bufnr
             exe 'silent e ' . bufname(qf_item.bufnr)
         endif
         call cursor( qf_item.lnum, qf_item.col )
+        endif
     elseif line =~ '^\S\+:\d\+:\s<<\S\+>>' " g method jump
         " get elements in location line ( file name, line )
         let line = getline('.')
@@ -193,8 +205,20 @@ function excscope#goto()
         " start jump
         if !empty(elements)
             call ex#window#goto_edit_window()
+            if a:modifier == 'shift'
+                let linenr = elements[1]
+                let filename = elements[0]
+                exe 'silent pedit +'.linenr .' '. filename
+                silent! wincmd P
+                if &previewwindow
+                    call ex#hl#target_line(line('.'))
+                    wincmd p
+                endif
+                call ex#window#goto_plugin_window()
+            else
             exe 'silent e ' . elements[0]
             exec 'call cursor(elements[1], 1)'
+        endif
         endif
     else
         call ex#warning("could not jump")
@@ -574,7 +598,7 @@ endfunction
 function excscope#confirm_select(modifier)
     let s:confirm_at = line('.')
     call ex#hl#confirm_line(s:confirm_at)
-    call excscope#goto()
+    call excscope#goto(a:modifier)
 endfunction
 
 " excscope#select {{{2
