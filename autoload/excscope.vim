@@ -234,6 +234,11 @@ endfunction
 
 " excscope#go_direct {{{2
 function excscope#go_direct( search_method )
+    " [Geng]: add the current line&col to jump list
+    let target_line = line('.')
+    let target_col = col('.')
+    execute "normal " . target_line . "G" . target_col . "|"
+    
     let search_text = ''
     if a:search_method ==# 'i' " including file
         let search_text = expand("<cfile>".":t")
@@ -599,6 +604,13 @@ function excscope#confirm_select(modifier)
     let s:confirm_at = line('.')
     call ex#hl#confirm_line(s:confirm_at)
     call excscope#goto(a:modifier)
+
+    " [Geng]: add the target line&col to jump list
+    let target_line = line('.')
+    let target_col = col('.')
+    execute "normal " . target_line . "G" . target_col . "|"
+    " [Geng]: before return from this function, focus on the plugin window
+    call ex#window#goto_plugin_window()
 endfunction
 
 " excscope#select {{{2
