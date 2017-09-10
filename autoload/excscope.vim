@@ -238,6 +238,7 @@ function excscope#go_direct( search_method )
     let target_line = line('.')
     let target_col = col('.')
     execute "normal " . target_line . "G" . target_col . "|"
+    execute "KangarooPush"
     
     let search_text = ''
     if a:search_method ==# 'i' " including file
@@ -609,6 +610,8 @@ function excscope#confirm_select(modifier)
     let target_line = line('.')
     let target_col = col('.')
     execute "normal " . target_line . "G" . target_col . "|"
+    execute "KangarooPush"
+    
     " [Geng]: before return from this function, focus on the plugin window
     call ex#window#goto_plugin_window()
 endfunction
