@@ -74,7 +74,7 @@ function excscope#init_buffer()
 
     if line('$') <= 1 && g:ex_cscope_enable_help
         silent call append ( 0, s:help_text )
-        silent exec '$d'
+        " silent exec '$d'
     endif
 endfunction
 
@@ -441,7 +441,7 @@ function excscope#get_searchresult(search_pattern, search_method)
     " add online help 
     if g:ex_cscope_enable_help
         silent call append ( 0, s:help_text )
-        silent exec '$d'
+        " silent exec '$d'
         let start_line = len(s:help_text)
     else
         let start_line = 0
